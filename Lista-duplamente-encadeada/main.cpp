@@ -48,10 +48,26 @@ void create_list (list *L) {
 	*L = NULL;
 }
 
+void imprimeMenu( int &opcao){
+
+    printf("\n\tMENU\n");
+    printf("\n\t1 - consultar nota do Aluno digite 1");
+    printf("\n\t2 - opcao 2");
+    printf("\n\t3 - opcao 3");
+    printf("\n\t4 - sair 4\n\n");
+    printf("digite a opcao desejada\n\n");
+    scanf("%d", &opcao);
+
+
+}
 
 int main () {
 
       printf("============================LISTA DUPLAMENTE ENCADEADA==========================\n\n");
+
+   // int opcao;
+   // imprimeMenu(opcao);
+   // controlaMenu(opcao);
 
 	list		C;	/* a class of students */
 	student		s, *p;
