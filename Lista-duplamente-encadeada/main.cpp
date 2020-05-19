@@ -5,6 +5,10 @@
 #include <string.h>
 #include <iostream>
 
+#include <locale.h>
+#include <conio.h>
+#include <time.h>
+
 using namespace std;
 
 typedef struct _student {
@@ -48,36 +52,36 @@ void create_list (list *L) {
 	*L = NULL;
 }
 
-void imprimeMenu( int &opcao){
+void imprimeMenu( ){
+int opcao;
 
     printf("\n\tMENU\n");
-    printf("\n\t1 - consultar nota do Aluno digite 1");
-    printf("\n\t2 - opcao 2");
-    printf("\n\t3 - opcao 3");
-    printf("\n\t4 - sair 4\n\n");
-    printf("digite a opcao desejada\n\n");
+
+     printf("informe a opcao desejada\n");
+    printf("\n1 - consultar nota do Aluno digite 1");
+    printf("\n2 - opcao 2");
+    printf("\n3 - opcao 3");
+    printf("\n4 - sair 4\n\n");
+
     scanf("%d", &opcao);
 
-
+// system("pause");
+			system("@cls||clear");
+			//  escolhaOpcao();
 }
 
-int main () {
-
-      printf("============================LISTA DUPLAMENTE ENCADEADA==========================\n\n");
-
-   // int opcao;
-   // imprimeMenu(opcao);
-   // controlaMenu(opcao);
+ buscarEstudante(){
+  //  int escolhaOpcao;
 
 	list		C;	/* a class of students */
 	student		s, *p;
 	int		id;
-	FILE		*f;
+	FILE		*arquivo;
 
 
 
-	f = fopen ("./List.txt", "r");
-	if (!f) {
+	arquivo = fopen ("./List.txt", "r");
+	if (!arquivo) {
 		perror ("List");
 		exit (1);
 	}
@@ -85,19 +89,24 @@ int main () {
 	create_list (&C);
 
 	for (;;) {
-		fscanf (f, "%d %s %f\n", &s.id, s.name, &s.gpa);
-		if (feof (f))
+		fscanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
+		if (feof (arquivo))
       break;
 		insert_list (&C, s);
 	}
-	fclose (f);
+	fclose (arquivo);
 
 	for (;;) {
-		printf ("Enter student ID, -1 to finish: ");
+		printf ("informe ID do estudante ou zero(0) para voltar ao MENU\n");
 		scanf ("%d", &id);
 
-		if (id == -1)
-       break;
+		if (id == 0){
+            system("@cls||clear");
+            fclose (arquivo);
+            imprimeMenu( );
+
+          } //else if(id == -1)
+     //  break;
 
 		p = search_list (C, id);
 
@@ -109,7 +118,40 @@ int main () {
 	}
 	exit (0);
 }
+void escolhaOpcao(){
+    int opcao;
+
+     switch(opcao){
+        case 1:
+            buscarEstudante();
+     //   FILE *arquivo = fopen (caminho, "r"); //rt leitura
+          //"./List.txt"
+          break;
+        case 2:
+      //  arquivo = fopen (caminho, "wt"); //wt gravação
+            printf("caso 2 em desenvolvimento!!!\n");
+     //   scanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
+        break;
+        case 3:
+            printf("caso 3 em desenvolvimento!!!\n");
+       // arquivo = fopen (caminho, "r"); // a append
+        break;
+        default:
+            printf("opcao invalida tente novamente\n");
+            imprimeMenu( );
+
+     }
 
 
+}
 
 
+int main () {
+
+      printf("============================LISTA DUPLAMENTE ENCADEADA==========================\n\n");
+
+imprimeMenu( );
+escolhaOpcao();
+
+return 0;
+}
