@@ -43,7 +43,7 @@ void create_list (list *L) {
 	*L = NULL;
 }
 
-buscarEstudante(int opcao){
+buscarEstudante(int opcao, char arquivoTexto[], char textoAux[]){
 
 		list		C;	/* a class of students */
 	student		s, *p;
@@ -60,6 +60,25 @@ if(opcao == 1){
 
 			insert_list (&C, s);
 	}
+			do{
+        printf("\n");
+		printf ("Informe a ID do estudante:");
+		printf("\n");
+		printf ("Voltar ao MENU digite 0(zero)");
+		printf("\n");
+		scanf ("%d", &id);
+
+		p = search_list (C, id);
+        if(id == 0){
+            printf("VOLTANDO PARA O MENU...");
+        }else if (!p)
+			printf ("ID #%d nao encontarda!\n", id);
+			else
+			// system( "clear||cls");
+			printf ("%d\t%s\t%0.2f\n", p->id, p->name, p->gpa);
+	}while (id !=0);
+
+	//}
 
 }else if(opcao == 2){
     arquivo = fopen ("./List.txt", "wt");
@@ -70,7 +89,7 @@ if(opcao == 1){
     printf("pois esta sobrescrevendo o arquivo original\n");
 
     system("pause");
-    // observação criar um while [S/N] para cadastrar aluno inclusive um vetor para ser incrementado e dar sequencia no id de aluno
+    // observação criar um while [S/N] para cadastrar aluno
 
 //	while (!feof(arquivo)) {
 
@@ -97,13 +116,14 @@ if(opcao == 1){
 
 	while (!feof(arquivo)) {
 		fscanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
-		printf("%d %s %f\n", &s.id, s.name, &s.gpa);
-		// fgets(arquivoTexto, 300000, arquivo);
+		//printf("%d %s %f\n", id, name, gpa);
+		 fgets(arquivoTexto, 300000, arquivo);
+		  strcat(textoAux,arquivoTexto);
 	//	printf ("%d\t%s\t%0.2f\n", p->id, p->name, p->gpa);
 
 			insert_list (&C, s);
 	}
- printf("Listagem de Alunos>>\n%s",arquivo);
+ printf("Listagem de Alunos>>\n%s",textoAux);
 
 }else if (!arquivo) {
 		perror ("List");
@@ -114,9 +134,10 @@ if(opcao == 1){
 
 
 	fclose (arquivo);
-
-	do{
-
+	printf("\n\n");
+   system("pause");
+/*	do{
+        printf("\n");
 		printf ("Informe a ID do estudante:");
 		printf("\n");
 		printf ("Voltar ao MENU digite 0(zero)");
@@ -130,7 +151,7 @@ if(opcao == 1){
 			else
 			// system( "clear||cls");
 			printf ("%d\t%s\t%0.2f\n", p->id, p->name, p->gpa);
-	}while (id !=0);
+	}while (id !=0);*/
 
 }
 
@@ -146,6 +167,7 @@ int main () {
 
 	int opcao;
 	char arquivoTexto[300000];
+	char textoAux[300000];
 do{
 
     printf("\n\tMENU\n");
@@ -161,18 +183,18 @@ do{
 
     switch(opcao){
         case 1:
-           buscarEstudante(opcao);
+           buscarEstudante(opcao, arquivoTexto, textoAux);
         break;
 
         case 2:
-            buscarEstudante(opcao);
+           // buscarEstudante(opcao, arquivoTexto, textoAux );
        // cadastrarEstudante();
          system("pause");
         break;
         case 3:
-             buscarEstudante(opcao);
+             buscarEstudante(opcao, arquivoTexto, textoAux);
            // printf("caso 3 em desenvolvimento!!!\n");
-            system("pause");
+           // system("pause");
         break;
         case 4:
             printf("SAINDO...\n");
