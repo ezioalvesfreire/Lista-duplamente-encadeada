@@ -42,7 +42,7 @@ void create_list (list *L) {
 	*L = NULL;
 }
 
-buscarEstudante(){
+buscarEstudante(int opcao){
 
 		list		C;	/* a class of students */
 	student		s, *p;
@@ -50,20 +50,62 @@ buscarEstudante(){
 	FILE		*arquivo;
 
 
-
-	arquivo = fopen ("./List.txt", "r");
-	if (!arquivo) {
-		perror ("List");
-		exit (1);
-	}
-
-	create_list (&C);
+if(opcao == 1){
+ arquivo = fopen ("./List.txt", "r");
+ create_list (&C);
 
 	while (!feof(arquivo)) {
 		fscanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
 
 			insert_list (&C, s);
 	}
+
+}else if(opcao == 2){
+    arquivo = fopen ("./List.txt", "wt");
+    create_list (&C);
+    printf("Opcao 2 foi selecionada ADICIONAR DADOS NO ARQUIVO\n");
+    printf("\n\nATENCAO: aprimorar o sistema de manipulacao de arquivo no case 2\n");
+    printf("SAIBA QUE OS DADOS DE SEUA AQUIVO ORIGINAL SERA APAGADO\n");
+    printf("pois esta sobrescrevendo o arquivo original\n");
+
+    system("pause");
+//	while (!feof(arquivo)) {
+
+            printf("informe a ID do Aluno\n");
+            scanf("%d",&s.id);
+            fprintf(arquivo,"%d ",&s.id);
+
+            printf("informe o nome do Aluno\n");
+            scanf("%s", s.name);
+            fprintf(arquivo,"%s ",s.name);
+
+            printf("Informe a GPA do Aluno\n");
+            scanf("%.20f ",&s.gpa);
+
+            fprintf(arquivo, "%f", &s.gpa);
+
+		//fscanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
+
+			insert_list (&C, s);
+//	}
+}else if(opcao == 3){
+    arquivo = fopen ("./List.txt", "r");
+    create_list (&C);
+
+	while (!feof(arquivo)) {
+		fscanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
+
+			insert_list (&C, s);
+	}
+
+}else if (!arquivo) {
+		perror ("List");
+		printf("O arquivo não existe!");
+		system("pause");
+		exit (1);
+	}
+
+
 	fclose (arquivo);
 
 	do{
@@ -111,11 +153,12 @@ do{
 
     switch(opcao){
         case 1:
-           buscarEstudante();
+           buscarEstudante(opcao);
         break;
 
         case 2:
-        cadastrarEstudante();
+            buscarEstudante(opcao);
+       // cadastrarEstudante();
          system("pause");
         break;
         case 3:
