@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<ctype.h>
 
 typedef struct _student {
 	int		  id;
@@ -69,6 +70,8 @@ if(opcao == 1){
     printf("pois esta sobrescrevendo o arquivo original\n");
 
     system("pause");
+    // observação criar um while [S/N] para cadastrar aluno inclusive um vetor para ser incrementado e dar sequencia no id de aluno
+
 //	while (!feof(arquivo)) {
 
             printf("informe a ID do Aluno\n");
@@ -94,9 +97,13 @@ if(opcao == 1){
 
 	while (!feof(arquivo)) {
 		fscanf (arquivo, "%d %s %f\n", &s.id, s.name, &s.gpa);
+		printf("%d %s %f\n", &s.id, s.name, &s.gpa);
+		// fgets(arquivoTexto, 300000, arquivo);
+	//	printf ("%d\t%s\t%0.2f\n", p->id, p->name, p->gpa);
 
 			insert_list (&C, s);
 	}
+ printf("Listagem de Alunos>>\n%s",arquivo);
 
 }else if (!arquivo) {
 		perror ("List");
@@ -138,6 +145,7 @@ int main () {
 	printf("============================LISTA DUPLAMENTE ENCADEADA==========================\n\n");
 
 	int opcao;
+	char arquivoTexto[300000];
 do{
 
     printf("\n\tMENU\n");
@@ -162,7 +170,8 @@ do{
          system("pause");
         break;
         case 3:
-            printf("caso 3 em desenvolvimento!!!\n");
+             buscarEstudante(opcao);
+           // printf("caso 3 em desenvolvimento!!!\n");
             system("pause");
         break;
         case 4:
